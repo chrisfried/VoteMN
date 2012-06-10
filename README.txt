@@ -1,0 +1,1 @@
+These are the beginnings of a project to produce a comprehensive voter education application for State and Federal level races in Minnesota.
