@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+	<meta charset="utf-8" />
+
+	<!-- Set the viewport width to device width for mobile -->
+	<meta name="viewport" content="width=724px" />
+
+	<title>Candidate Tiles</title>
+  
+	<!-- Included CSS Files -->
+	<link rel="stylesheet" href="stylesheets/races.css">
+
+	<!--[if lt IE 9]>
+		<link rel="stylesheet" href="stylesheets/ie.css">
+	<![endif]-->
+	
+	<script src="javascripts/modernizr.foundation.js"></script>
+
+	<!-- IE Fix for HTML5 Tags -->
+	<!--[if lt IE 9]>
+		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+
+</head>
+<body onload="DistrictGetter()">
+
+	<div class="container cards">
+		<div class="race" id="us"><div class="race-header"> </div></div>
+		<div class="race" id="us1"><div class="race-header"> </div></div>
+		<div class="race" id="us2"><div class="race-header"> </div></div>
+		<div class="race" id="us3"><div class="race-header"> </div></div>
+		<div class="race" id="us4"><div class="race-header"> </div></div>
+		<div class="race" id="us5"><div class="race-header"> </div></div>
+		<div class="race" id="us6"><div class="race-header"> </div></div>
+		<div class="race" id="us7"><div class="race-header"> </div></div>
+		<div class="race" id="us8"><div class="race-header"> </div></div>
+		<div class="race" id="mn1"><div class="race-header"> </div></div>
+		<div class="race" id="mn2"><div class="race-header"> </div></div>
+		<div class="race" id="mn3"><div class="race-header"> </div></div>
+		<div class="race" id="mn4"><div class="race-header"> </div></div>
+		<div class="race" id="mn5"><div class="race-header"> </div></div>
+		<div class="race" id="mn6"><div class="race-header"> </div></div>
+		<div class="race" id="mn7"><div class="race-header"> </div></div>
+		<div class="race" id="mn8"><div class="race-header"> </div></div>
+		<div class="race" id="mn9"><div class="race-header"> </div></div>
+		<div class="race" id="mn10"><div class="race-header"> </div></div>
+		<div class="race" id="mn11"><div class="race-header"> </div></div>
+		<div class="race" id="mn12"><div class="race-header"> </div></div>
+		<div class="race" id="mn13"><div class="race-header"> </div></div>
+		<div class="race" id="mn14"><div class="race-header"> </div></div>
+		<div class="race" id="mn15"><div class="race-header"> </div></div>
+		<div class="race" id="mn16"><div class="race-header"> </div></div>
+		<div class="race" id="mn17"><div class="race-header"> </div></div>
+		<div class="race" id="mn18"><div class="race-header"> </div></div>
+		<div class="race" id="mn19"><div class="race-header"> </div></div>
+		<div class="race" id="mn20"><div class="race-header"> </div></div>
+		<div class="race" id="mn21"><div class="race-header"> </div></div>
+		<div class="race" id="mn22"><div class="race-header"> </div></div>
+		<div class="race" id="mn23"><div class="race-header"> </div></div>
+		<div class="race" id="mn24"><div class="race-header"> </div></div>
+		<div class="race" id="mn25"><div class="race-header"> </div></div>
+		<div class="race" id="mn26"><div class="race-header"> </div></div>
+		<div class="race" id="mn27"><div class="race-header"> </div></div>
+		<div class="race" id="mn28"><div class="race-header"> </div></div>
+		<div class="race" id="mn29"><div class="race-header"> </div></div>
+		<div class="race" id="mn30"><div class="race-header"> </div></div>
+		<div class="race" id="mn31"><div class="race-header"> </div></div>
+		<div class="race" id="mn32"><div class="race-header"> </div></div>
+		<div class="race" id="mn33"><div class="race-header"> </div></div>
+		<div class="race" id="mn34"><div class="race-header"> </div></div>
+		<div class="race" id="mn35"><div class="race-header"> </div></div>
+		<div class="race" id="mn36"><div class="race-header"> </div></div>
+		<div class="race" id="mn37"><div class="race-header"> </div></div>
+		<div class="race" id="mn38"><div class="race-header"> </div></div>
+		<div class="race" id="mn39"><div class="race-header"> </div></div>
+		<div class="race" id="mn40"><div class="race-header"> </div></div>
+		<div class="race" id="mn41"><div class="race-header"> </div></div>
+		<div class="race" id="mn42"><div class="race-header"> </div></div>
+		<div class="race" id="mn43"><div class="race-header"> </div></div>
+		<div class="race" id="mn44"><div class="race-header"> </div></div>
+		<div class="race" id="mn45"><div class="race-header"> </div></div>
+		<div class="race" id="mn46"><div class="race-header"> </div></div>
+		<div class="race" id="mn47"><div class="race-header"> </div></div>
+		<div class="race" id="mn48"><div class="race-header"> </div></div>
+		<div class="race" id="mn49"><div class="race-header"> </div></div>
+		<div class="race" id="mn50"><div class="race-header"> </div></div>
+		<div class="race" id="mn51"><div class="race-header"> </div></div>
+		<div class="race" id="mn52"><div class="race-header"> </div></div>
+		<div class="race" id="mn53"><div class="race-header"> </div></div>
+		<div class="race" id="mn54"><div class="race-header"> </div></div>
+		<div class="race" id="mn55"><div class="race-header"> </div></div>
+		<div class="race" id="mn56"><div class="race-header"> </div></div>
+		<div class="race" id="mn57"><div class="race-header"> </div></div>
+		<div class="race" id="mn58"><div class="race-header"> </div></div>
+		<div class="race" id="mn59"><div class="race-header"> </div></div>
+		<div class="race" id="mn60"><div class="race-header"> </div></div>
+		<div class="race" id="mn61"><div class="race-header"> </div></div>
+		<div class="race" id="mn62"><div class="race-header"> </div></div>
+		<div class="race" id="mn63"><div class="race-header"> </div></div>
+		<div class="race" id="mn64"><div class="race-header"> </div></div>
+		<div class="race" id="mn65"><div class="race-header"> </div></div>
+		<div class="race" id="mn66"><div class="race-header"> </div></div>
+		<div class="race" id="mn67"><div class="race-header"> </div></div>
+		<div class="race" id="mn1a"><div class="race-header"> </div></div>
+		<div class="race" id="mn1b"><div class="race-header"> </div></div>
+		<div class="race" id="mn2a"><div class="race-header"> </div></div>
+		<div class="race" id="mn2b"><div class="race-header"> </div></div>
+		<div class="race" id="mn3a"><div class="race-header"> </div></div>
+		<div class="race" id="mn3b"><div class="race-header"> </div></div>
+		<div class="race" id="mn4a"><div class="race-header"> </div></div>
+		<div class="race" id="mn4b"><div class="race-header"> </div></div>
+		<div class="race" id="mn5a"><div class="race-header"> </div></div>
+		<div class="race" id="mn5b"><div class="race-header"> </div></div>
+		<div class="race" id="mn6a"><div class="race-header"> </div></div>
+		<div class="race" id="mn6b"><div class="race-header"> </div></div>
+		<div class="race" id="mn7a"><div class="race-header"> </div></div>
+		<div class="race" id="mn7b"><div class="race-header"> </div></div>
+		<div class="race" id="mn8a"><div class="race-header"> </div></div>
+		<div class="race" id="mn8b"><div class="race-header"> </div></div>
+		<div class="race" id="mn9a"><div class="race-header"> </div></div>
+		<div class="race" id="mn9b"><div class="race-header"> </div></div>
+		<div class="race" id="mn10a"><div class="race-header"> </div></div>
+		<div class="race" id="mn10b"><div class="race-header"> </div></div>
+		<div class="race" id="mn11a"><div class="race-header"> </div></div>
+		<div class="race" id="mn11b"><div class="race-header"> </div></div>
+		<div class="race" id="mn12a"><div class="race-header"> </div></div>
+		<div class="race" id="mn12b"><div class="race-header"> </div></div>
+		<div class="race" id="mn13a"><div class="race-header"> </div></div>
+		<div class="race" id="mn13b"><div class="race-header"> </div></div>
+		<div class="race" id="mn14a"><div class="race-header"> </div></div>
+		<div class="race" id="mn14b"><div class="race-header"> </div></div>
+		<div class="race" id="mn15a"><div class="race-header"> </div></div>
+		<div class="race" id="mn15b"><div class="race-header"> </div></div>
+		<div class="race" id="mn16a"><div class="race-header"> </div></div>
+		<div class="race" id="mn16b"><div class="race-header"> </div></div>
+		<div class="race" id="mn17a"><div class="race-header"> </div></div>
+		<div class="race" id="mn17b"><div class="race-header"> </div></div>
+		<div class="race" id="mn18a"><div class="race-header"> </div></div>
+		<div class="race" id="mn18b"><div class="race-header"> </div></div>
+		<div class="race" id="mn19a"><div class="race-header"> </div></div>
+		<div class="race" id="mn19b"><div class="race-header"> </div></div>
+		<div class="race" id="mn20a"><div class="race-header"> </div></div>
+		<div class="race" id="mn20b"><div class="race-header"> </div></div>
+		<div class="race" id="mn21a"><div class="race-header"> </div></div>
+		<div class="race" id="mn21b"><div class="race-header"> </div></div>
+		<div class="race" id="mn22a"><div class="race-header"> </div></div>
+		<div class="race" id="mn22b"><div class="race-header"> </div></div>
+		<div class="race" id="mn23a"><div class="race-header"> </div></div>
+		<div class="race" id="mn23b"><div class="race-header"> </div></div>
+		<div class="race" id="mn24a"><div class="race-header"> </div></div>
+		<div class="race" id="mn24b"><div class="race-header"> </div></div>
+		<div class="race" id="mn25a"><div class="race-header"> </div></div>
+		<div class="race" id="mn25b"><div class="race-header"> </div></div>
+		<div class="race" id="mn26a"><div class="race-header"> </div></div>
+		<div class="race" id="mn26b"><div class="race-header"> </div></div>
+		<div class="race" id="mn27a"><div class="race-header"> </div></div>
+		<div class="race" id="mn27b"><div class="race-header"> </div></div>
+		<div class="race" id="mn28a"><div class="race-header"> </div></div>
+		<div class="race" id="mn28b"><div class="race-header"> </div></div>
+		<div class="race" id="mn29a"><div class="race-header"> </div></div>
+		<div class="race" id="mn29b"><div class="race-header"> </div></div>
+		<div class="race" id="mn30a"><div class="race-header"> </div></div>
+		<div class="race" id="mn30b"><div class="race-header"> </div></div>
+		<div class="race" id="mn31a"><div class="race-header"> </div></div>
+		<div class="race" id="mn31b"><div class="race-header"> </div></div>
+		<div class="race" id="mn32a"><div class="race-header"> </div></div>
+		<div class="race" id="mn32b"><div class="race-header"> </div></div>
+		<div class="race" id="mn33a"><div class="race-header"> </div></div>
+		<div class="race" id="mn33b"><div class="race-header"> </div></div>
+		<div class="race" id="mn34a"><div class="race-header"> </div></div>
+		<div class="race" id="mn34b"><div class="race-header"> </div></div>
+		<div class="race" id="mn35a"><div class="race-header"> </div></div>
+		<div class="race" id="mn35b"><div class="race-header"> </div></div>
+		<div class="race" id="mn36a"><div class="race-header"> </div></div>
+		<div class="race" id="mn36b"><div class="race-header"> </div></div>
+		<div class="race" id="mn37a"><div class="race-header"> </div></div>
+		<div class="race" id="mn37b"><div class="race-header"> </div></div>
+		<div class="race" id="mn38a"><div class="race-header"> </div></div>
+		<div class="race" id="mn38b"><div class="race-header"> </div></div>
+		<div class="race" id="mn39a"><div class="race-header"> </div></div>
+		<div class="race" id="mn39b"><div class="race-header"> </div></div>
+		<div class="race" id="mn40a"><div class="race-header"> </div></div>
+		<div class="race" id="mn40b"><div class="race-header"> </div></div>
+		<div class="race" id="mn41a"><div class="race-header"> </div></div>
+		<div class="race" id="mn41b"><div class="race-header"> </div></div>
+		<div class="race" id="mn42a"><div class="race-header"> </div></div>
+		<div class="race" id="mn42b"><div class="race-header"> </div></div>
+		<div class="race" id="mn43a"><div class="race-header"> </div></div>
+		<div class="race" id="mn43b"><div class="race-header"> </div></div>
+		<div class="race" id="mn44a"><div class="race-header"> </div></div>
+		<div class="race" id="mn44b"><div class="race-header"> </div></div>
+		<div class="race" id="mn45a"><div class="race-header"> </div></div>
+		<div class="race" id="mn45b"><div class="race-header"> </div></div>
+		<div class="race" id="mn46a"><div class="race-header"> </div></div>
+		<div class="race" id="mn46b"><div class="race-header"> </div></div>
+		<div class="race" id="mn47a"><div class="race-header"> </div></div>
+		<div class="race" id="mn47b"><div class="race-header"> </div></div>
+		<div class="race" id="mn48a"><div class="race-header"> </div></div>
+		<div class="race" id="mn48b"><div class="race-header"> </div></div>
+		<div class="race" id="mn49a"><div class="race-header"> </div></div>
+		<div class="race" id="mn49b"><div class="race-header"> </div></div>
+		<div class="race" id="mn50a"><div class="race-header"> </div></div>
+		<div class="race" id="mn50b"><div class="race-header"> </div></div>
+		<div class="race" id="mn51a"><div class="race-header"> </div></div>
+		<div class="race" id="mn51b"><div class="race-header"> </div></div>
+		<div class="race" id="mn52a"><div class="race-header"> </div></div>
+		<div class="race" id="mn52b"><div class="race-header"> </div></div>
+		<div class="race" id="mn53a"><div class="race-header"> </div></div>
+		<div class="race" id="mn53b"><div class="race-header"> </div></div>
+		<div class="race" id="mn54a"><div class="race-header"> </div></div>
+		<div class="race" id="mn54b"><div class="race-header"> </div></div>
+		<div class="race" id="mn55a"><div class="race-header"> </div></div>
+		<div class="race" id="mn55b"><div class="race-header"> </div></div>
+		<div class="race" id="mn56a"><div class="race-header"> </div></div>
+		<div class="race" id="mn56b"><div class="race-header"> </div></div>
+		<div class="race" id="mn57a"><div class="race-header"> </div></div>
+		<div class="race" id="mn57b"><div class="race-header"> </div></div>
+		<div class="race" id="mn58a"><div class="race-header"> </div></div>
+		<div class="race" id="mn58b"><div class="race-header"> </div></div>
+		<div class="race" id="mn59a"><div class="race-header"> </div></div>
+		<div class="race" id="mn59b"><div class="race-header"> </div></div>
+		<div class="race" id="mn60a"><div class="race-header"> </div></div>
+		<div class="race" id="mn60b"><div class="race-header"> </div></div>
+		<div class="race" id="mn61a"><div class="race-header"> </div></div>
+		<div class="race" id="mn61b"><div class="race-header"> </div></div>
+		<div class="race" id="mn62a"><div class="race-header"> </div></div>
+		<div class="race" id="mn62b"><div class="race-header"> </div></div>
+		<div class="race" id="mn63a"><div class="race-header"> </div></div>
+		<div class="race" id="mn63b"><div class="race-header"> </div></div>
+		<div class="race" id="mn64a"><div class="race-header"> </div></div>
+		<div class="race" id="mn64b"><div class="race-header"> </div></div>
+		<div class="race" id="mn65a"><div class="race-header"> </div></div>
+		<div class="race" id="mn65b"><div class="race-header"> </div></div>
+		<div class="race" id="mn66a"><div class="race-header"> </div></div>
+		<div class="race" id="mn66b"><div class="race-header"> </div></div>
+		<div class="race" id="mn67a"><div class="race-header"> </div></div>
+		<div class="race" id="mn67b"><div class="race-header"> </div></div>
+	</div>
+
+	<script src="javascripts/jquery.min.js"></script>
+	<script src="javascripts/races.js"></script>
+
+</body>
+</html>

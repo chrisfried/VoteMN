@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+<title>Candidate Finder</title>
+	<link rel="stylesheet" href="stylesheets/foundation.css">
+	<link rel="stylesheet" href="stylesheets/app.css">
+	<link rel="stylesheet" href="stylesheets/vote.css">
+<style>
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#map_canvas {
+  height: 100px;
+}
+
+@media print {
+  html, body {
+    height: auto;
+  }
+
+  #map_canvas {
+    height: 650px;
+  }
+}
+.candidates {
+	text-transform:capitalize;
+}
+</style>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript">
+	var geocoder;
+	var address;
+	  var map;
+	  function initialize() {
+		geocoder = new google.maps.Geocoder();
+		var latlng = new google.maps.LatLng(46.2, -94.3);
+		var myOptions = {
+		  zoom: 10,
+		  center: latlng,
+		  mapTypeId: google.maps.MapTypeId.ROADMAP
+		}
+		map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+	  } 
+
+	function codeAddress() {
+		$('.cards').text("");
+		initialize();
+		address = document.getElementById("address").value;
+		geocoder = new google.maps.Geocoder();
+		geocoder.geocode( { 'address': address}, function(results, status) {
+		  if (status == google.maps.GeocoderStatus.OK) {
+		    var addFormatted = results[0].formatted_address;
+			console.log(addFormatted);
+			var addArray = addFormatted.split(', ');
+			if (addArray.length > 3 && addArray[2].indexOf("MN") >= 0) {
+				map.setCenter(results[0].geometry.location);
+				var lat = results[0].geometry.location.lat();
+				var lng = results[0].geometry.location.lng();
+				var marker = new google.maps.Marker({
+					map: map, 
+					position: results[0].geometry.location
+				});
+				var layer = new google.maps.FusionTablesLayer({
+				   query: {
+					 select: 'geometry',
+					 from: '3835940',
+					 where: 'ST_INTERSECTS(geometry, CIRCLE(LATLNG(' + lat + ', ' + lng + '),1))',
+					 limit: 1
+					}
+				 });
+				layer.setMap(map);
+				getData(lat,lng);
+			} else {
+				alert("Please enter a valid Minnesota address.");
+			}			
+		  } else {
+			alert("Geocode was not successful for the following reason: " + status);
+		  }
+		});
+	}
+	  
+	function getData(lat,lng) {
+	
+		// Builds a Fusion Tables SQL query and hands the result to dataHandler()
+		var queryUrlHead = 'http://www.google.com/fusiontables/api/query?sql=';
+		var queryUrlTail = '&jsonCallback=?'; // ? could be a function name
+				
+		// Legislative District
+		var query1 = "SELECT DISTRICT FROM 1AcpIpmZjvOe9Agod-2Ga3jru9SOPe21J-H9znFQ WHERE ST_INTERSECTS(geometry, CIRCLE(LATLNG(" + lat + ", " + lng + "),0.1)) LIMIT 1";
+		var queryurl1 = encodeURI(queryUrlHead + query1 + queryUrlTail);
+		var jqxhr1 = $.get(queryurl1, lDistrictGetter, "jsonp");
+		
+		// Congressional District
+		var query2 = "SELECT name FROM 1HZzltz1tJZ3BTCSW5N8dDeA2z5Rh8YLr4V3aJcU WHERE ST_INTERSECTS(geometry, CIRCLE(LATLNG(" + lat + ", " + lng + "),0.1)) LIMIT 1";
+		var queryurl2 = encodeURI(queryUrlHead + query2 + queryUrlTail);
+		var jqxhr2 = $.get(queryurl2, cDistrictGetter, "jsonp");
+		
+		// President
+		var query7 = "SELECT seat, name, party, URL, Twitter, 'Facebook Page', 'Facebook Profile' FROM 1ClPKZRFh0vwwPQz-CK2QHP9mQy4Stax1mTxDpD8 WHERE seat = 'President'";
+		var queryurl7 = encodeURI(queryUrlHead + query7 + queryUrlTail);
+		var jqxhr7 = $.get(queryurl7, candidateLister, "jsonp");
+		
+		// Senator
+		var query3 = "SELECT seat, name, party, URL, Twitter, 'Facebook Page', 'Facebook Profile' FROM 1ClPKZRFh0vwwPQz-CK2QHP9mQy4Stax1mTxDpD8 WHERE seat = 'U.S. Senator'";
+		var queryurl3 = encodeURI(queryUrlHead + query3 + queryUrlTail);
+		var jqxhr3 = $.get(queryurl3, candidateLister, "jsonp");
+	}
+		
+	function lDistrictGetter(d) {
+		var data = d.table.rows;
+		var district = data[0] + "";
+		var sDistrict = district.slice(0,-1);
+		
+		// Builds a Fusion Tables SQL query and hands the result to dataHandler()
+		var queryUrlHead = 'http://www.google.com/fusiontables/api/query?sql=';
+		var queryUrlTail = '&jsonCallback=?'; // ? could be a function name
+		
+		var query5 = "SELECT seat, name, party, URL, Twitter, 'Facebook Page', 'Facebook Profile' FROM 1ClPKZRFh0vwwPQz-CK2QHP9mQy4Stax1mTxDpD8 WHERE seat = 'State Representative District " + district + "'";
+		var queryurl5 = encodeURI(queryUrlHead + query5 + queryUrlTail);
+		var jqxhr5 = $.get(queryurl5, candidateLister, "jsonp");
+		
+		var query6 = "SELECT seat, name, party, URL, Twitter, 'Facebook Page', 'Facebook Profile' FROM 1ClPKZRFh0vwwPQz-CK2QHP9mQy4Stax1mTxDpD8 WHERE seat = 'State Senator District " + sDistrict + "'";
+		var queryurl6 = encodeURI(queryUrlHead + query6 + queryUrlTail);
+		var jqxhr6 = $.get(queryurl6, candidateLister, "jsonp");
+		
+	}
+		
+	function cDistrictGetter(d) {
+		var data = d.table.rows;
+		var district = data[0] + "";
+		
+		// Builds a Fusion Tables SQL query and hands the result to dataHandler()
+		var queryUrlHead = 'http://www.google.com/fusiontables/api/query?sql=';
+		var queryUrlTail = '&jsonCallback=?'; // ? could be a function name
+		
+		var query4 = "SELECT seat, name, party, URL, Twitter, 'Facebook Page', 'Facebook Profile' FROM 1ClPKZRFh0vwwPQz-CK2QHP9mQy4Stax1mTxDpD8 WHERE seat = 'U.S. Representative District " + district + "'";
+		var queryurl4 = encodeURI(queryUrlHead + query4 + queryUrlTail);
+		var jqxhr4 = $.get(queryurl4, candidateLister, "jsonp");
+	}
+	
+	function candidateLister(d) {
+		var data = d.table.rows;
+		var facebook;
+		var twitter;
+		var seat;
+		var urlFront;
+		var urlBack;
+		var photo;
+		var facebookID;
+		for (i=0;i<data.length;i++){
+			photo = '';
+			facebook = '';
+			twitter = '';
+			urlFront = '';
+			urlBack = '';
+			seat = data[i][0];
+			if (seat.indexOf("District") > 0) {
+				seat = seat.substring(0,seat.indexOf("District")) + '<br />' + seat.substring(seat.indexOf("District"));
+			}
+			if (data[i][5] !== "") {
+				facebook = '<div class="facebook"><a class="fb-icon" href="http://facebook.com/' + data[i][5] + '" target="_blank">Facebook</a><div class="fb-like" data-href="https://www.facebook.com/' + data[i][5] + '" data-send="false" data-layout="button_count" data-width="90" data-show-faces="false"></div></div>';
+				if (data[i][5].indexOf("/") > 0) {
+					facebookID = data[i][5].substring(data[i][5].lastIndexOf("/"));
+					portrait = 'https://graph.facebook.com/' + facebookID + '/picture?type=large';
+				} else {
+					portrait = 'https://graph.facebook.com/' + data[i][5] + '/picture?type=large';
+				}
+				photo = '<div style="background-image:url(\'' + portrait + '\');" class="photo">Candidate Portrait</div>'
+			} else if (data[i][6] !== "") {
+				portrait = 'https://graph.facebook.com/' + data[i][6] + '/picture?type=large';
+				photo = '<div style="background-image:url(\'' + portrait + '\');" class="photo">Candidate Portrait</div>'
+			}
+			if (data[i][4] !== "") {
+				twitter = '<div class="twitter"><a class="twitter-icon" href="http://twitter.com/' + data[i][4] + '" target="_blank">Twitter</a><a href="https://twitter.com/' + data[i][4] + '" class="twitter-follow-button" data-show-count="false" data-show-screen-name="false">Follow @' + data[i][4] + '</a></div>';
+			}
+			if (data[i][3] !== "") {
+				urlFront = '<a class="url" target="_blank" href="http://' + data[i][3] + '">';
+				urlBack = '</a>';
+			}
+			$('.cards').append('<div class="candidate-wrap"><div class="panel candidate ' + data[i][2] + '">' + photo + '<div class="name">' + urlFront + data[i][1].toLowerCase() + urlBack + '</div><div class="seat">' + seat + '</div>' + facebook + twitter + '</div></div>');
+		}
+		FB.XFBML.parse();
+		!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+	}
+	
+	function shuffle(sourceArray) {
+		for (var n = 0; n < sourceArray.length - 1; n++) {
+			var k = n + Math.floor(Math.random() * (sourceArray.length - n));
+
+			var temp = sourceArray[k];
+			sourceArray[k] = sourceArray[n];
+			sourceArray[n] = temp;
+		}
+		
+	}
+	
+</script>
+</head>
+<body onload="initialize()">
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=309594499123898";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+  <div id="map_canvas" style="height:50%"></div>
+  <div>
+    <input id="address" type="textbox" value="300 2nd Ave S, 56560">
+    <input type="button" value="Geocode" onclick="codeAddress()">
+  </div>
+  <div class="cards"></div>
+</body>
+</html>

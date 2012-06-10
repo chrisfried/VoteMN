@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+<title>Google Maps JavaScript API v3 Example: Geocoding Simple</title>
+<style>
+	html, body {
+	  height: 100%;
+	  margin: 0;
+	  padding: 0;
+	}
+
+	#map_canvas {
+	  height: 100%;
+	}
+
+	@media print {
+	  html, body {
+		height: auto;
+	  }
+
+	  #map_canvas {
+		height: 650px;
+	  }
+	}
+</style>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript">
+  var geocoder;
+  var map;
+  var address = '2202 n irving ave, minneapolis, mn';
+  function initialize() {
+    var myOptions = {
+      zoom: 13,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    }
+    map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+    geocoder = new google.maps.Geocoder();
+    geocoder.geocode( { 'address': address}, function(results, status) {
+        map.setCenter(results[0].geometry.location);
+        var lat = results[0].geometry.location.lat();
+        var lng = results[0].geometry.location.lng();
+        
+        var marker = new google.maps.Marker({
+            map: map, 
+            position: results[0].geometry.location
+        });
+        var layer = new google.maps.FusionTablesLayer({
+            query: {
+              select: 'geometry',
+              from: '3835940',
+              where: 'ST_INTERSECTS(geometry, CIRCLE(LATLNG(' + lat + ', ' + lng + '),1))',
+              limit: 1
+            }
+         });
+         layer.setMap(map);
+    });
+  }
+  function getData(table) {
+    // Builds a Fusion Tables SQL query and hands the result to dataHandler()
+
+    var queryUrlHead = 'http://www.google.com/fusiontables/api/query?sql=';
+    var queryUrlTail = '&jsonCallback=?'; // ? could be a function name
+    
+    // write your SQL as normal, then encode it
+    var query = "SELECT DISTRICT FROM 3835940 WHERE ST_INTERSECTS(geometry, CIRCLE(LATLNG(" + lat + ", ' + lng + "),1)) LIMIT 1";
+    var queryurl = encodeURI(queryUrlHead + query + queryUrlTail);
+
+    var jqxhr = $.get(queryurl, dataHandler, "jsonp");
+}
+</script>
+</head>
+<body onload="initialize()">
+<div id="map_canvas"></div>
+</body>
+</html>?

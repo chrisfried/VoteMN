@@ -1,0 +1,86 @@
+.candidate-wrap {
+	height:290px;
+	float:left;
+	width:160px;
+	margin:10px;
+}
+div.panel.candidate {
+	text-transform:capitalize;
+	padding:20px 20px 5px;
+}
+div.panel.R {
+	background:#fffafa;
+	color:#933;
+	background: -moz-linear-gradient(top, #FFFEFE 0%, #FFF4F4 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#FFFEFE), color-stop(100%,#FFF4F4));
+	background: -o-linear-gradient(top, #FFFEFE 0%,#FFF4F4 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#FFFEFE', endColorstr='#FFF4F4',GradientType=0 );
+}
+div.panel.DFL {
+	background:#fafaff;
+	color:#339;
+	background: -moz-linear-gradient(top, #FEFEFF 0%, #F4F4FF 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#FEFEFF), color-stop(100%,#F4F4FF));
+	background: -o-linear-gradient(top, #FEFEFF 0%,#F4F4FF 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#FEFEFF', endColorstr='#F4F4FF',GradientType=0 );
+}
+.photo {
+	margin:-20px -20px 0;
+	width:160px;
+	height:160px;
+	overflow:hidden;
+	background-size:cover;
+	background-position-x:center;
+	text-indent:-9000px;
+	-webkit-border-top-left-radius: 3px;
+	-webkit-border-top-right-radius: 3px;
+	-moz-border-radius-topleft: 3px;
+	-moz-border-radius-topright: 3px;
+	border-top-left-radius: 3px;
+	border-top-right-radius: 3px;
+}
+.name {
+	width:100%;
+	text-align:center;
+	padding:10px 0 3px;
+	font-weight:bold;
+}
+.seat {
+	width:100%;
+	text-align:center;
+	font-size:.8em;
+	line-height:1.2em;
+	color:#666;
+	margin: 0 0 15px;
+}
+.url {
+	text-decoration:none;
+	color:inherit;
+	border-bottom: 1px dashed;
+}
+.url:hover {
+	color:inherit;
+}
+.social {
+	width:100%;
+	height:20px;
+	margin-bottom:5px;
+}
+.fb-icon {
+	float:left;
+	height:20px;
+	width:20px;
+	display:block;
+	text-indent:-9000px;
+	margin-right:5px;
+	background-image:url('../images/fb.png');
+}
+.twitter-icon {
+	float:left;
+	height:20px;
+	width:20px;
+	display:block;
+	text-indent:-9000px;
+	margin-right:5px;
+	background-image:url('../images/twitter.png');
+}
